@@ -6,6 +6,8 @@ import math
 def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,buff,debuff,plus,move):
     listdamage=[]
     c*=buffatk ; d*=buffdef
+    if item2=="突擊背心":
+        d*=1.5
     inner=math.floor(22*power*c/d)
     base=math.floor(inner/72)+2
     damagemin=math.floor(base*0.85)
@@ -18,21 +20,23 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
     if buff==True:
         damagemin*=2 ; damagemax*=2
     if debuff==True:
-        damagemin/=2 ; damagemax/=2   
+        damagemin/=2 ; damagemax/=2
+    if item1=="生命寶珠":
+        damagemin*=1.3 ; damagemax*=1.3
     damagemin=math.floor(damagemin) ; damagemax=math.floor(damagemax)
     dmin=damagemin ; dmax=damagemax
     if typem==typatk[0] or (len(typatk)>1 and typem==typatk[1]):   
        damagemin=math.floor(damagemin*1.5) ; damagemax=math.floor(damagemax*1.5)
     for k in  range(0,len(typdef)):
             if typem=="normal":
-                if item1=="一般寶石":
+                if item1=="一般寶石"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2                  
                 if typdef[k]=="steel":
                      damagemin*=0.5 ; damagemax*=0.5
                 elif typdef[k]=="ghost":
                      damagemin*=0 ; damagemax*=0
             elif typem=="fighting":
-                if item1=="黑帶":
+                if item1=="黑帶"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["normal", "steel", "rock", "ice", "dark"]:
                      damagemin*=2 ; damagemax*=2
@@ -41,14 +45,14 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                 elif typdef[k]=="ghost":
                      damagemin*=0 ; damagemax*=0
             elif typem=="flying":
-                if item1=="銳利鳥嘴":
+                if item1=="銳利鳥嘴"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["fighting", "bug", "grass"]:
                      damagemin*=2 ; damagemax*=2
                 elif typdef[k] in ["rock", "steel", "thunder"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="poison":
-                if item1=="毒針":
+                if item1=="毒針"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["grass", "fairy"]:
                      damagemin*=2 ; damagemax*=2
@@ -57,7 +61,7 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                 elif typdef[k]=="steel":
                      damagemin*=0 ; damagemax*=0
             elif typem=="ground":
-                if item1=="柔軟沙子":
+                if item1=="柔軟沙子"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if move=="千箭齊發":
                     if "flying" in typdef: continue
@@ -68,21 +72,21 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                 elif typdef[k]=="flying":
                     damagemin*=0 ; damagemax*=0
             elif typem=="rock":
-                if item1=="硬石頭":
+                if item1=="硬石頭"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["flying", "bug", "fire", "ice"]:
                      damagemin*=2 ; damagemax*=2
                 elif typdef[k] in ["fighting", "ground", "steel"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="bug":
-                if item1=="銀粉":
+                if item1=="銀粉"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["dark", "psychic", "grass"]:
                      damagemin*=2 ; damagemax*=2
                 elif typdef[k] in ["fighting", "flying", "poison", "steel", "fire", "fairy", "ghost"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="ghost":
-                if item1=="詛咒之符":
+                if item1=="詛咒之符"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["ghost", "psychic"]:
                      damagemin*=2 ; damagemax*=2
@@ -91,35 +95,35 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                 elif typdef[k]=="normal":
                      damagemin*=0 ; damagemax*=0
             elif typem=="steel":
-                 if item1=="金屬膜":
+                 if item1=="金屬膜"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                  if typdef[k] in ["ice", "fairy", "rock"]:
                      damagemin*=2 ; damagemax*=2
                  elif typdef[k] in ["electric", "fire", "water", "steel"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="water":
-                 if item1=="神秘水滴":
+                 if item1=="神秘水滴"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                  if typdef[k] in ["ground", "fire", "rock"]:
                      damagemin*=2 ; damagemax*=2
                  elif typdef[k] in ["grass", "dragon", "water"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="grass":
-                 if item1=="奇跡種子":
+                 if item1=="奇跡種子"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                  if typdef[k] in ["ground", "water", "rock"]:
                      damagemin*=2 ; damagemax*=2
                  elif typdef[k] in ["grass", "dragon", "fire", "steel", "flying", "bug", "poison"]: 
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="fire":
-                  if item1=="木炭":
+                  if item1=="木炭"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["grass", "ice", "bug", "steel"]:
                      damagemin*=2 ; damagemax*=2
                   elif typdef[k] in ["fire", "dragon", "water", "rock"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="electric":
-                  if item1=="磁鐵":
+                  if item1=="磁鐵"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["water", "flying"]:
                      damagemin*=2 ; damagemax*=2
@@ -128,7 +132,7 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                   elif typdef[k]=="ground":
                      damagemin*=0 ; damagemax*=0
             elif typem=="psychic":
-                  if item1=="彎曲的湯匙":
+                  if item1=="彎曲的湯匙"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["fighting", "poison"]:
                      damagemin*=2 ; damagemax*=2
@@ -137,7 +141,7 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                   elif typdef[k]=="dark":
                       damagemin*=0 ; damagemax*=0
             elif typem=="dragon":
-                  if item1=="龍之牙":
+                  if item1=="龍之牙"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k]=="dragon":
                      damagemin*=2 ; damagemax*=2
@@ -147,7 +151,7 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                      if move!="歸無之光":
                         damagemin*=0 ; damagemax*=0 
             elif typem=="ice":
-                  if item1=="不融冰":
+                  if item1=="不融冰"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["flying", "ground", "dragon", "grass"]:
                      damagemin*=2 ; damagemax*=2
@@ -159,14 +163,14 @@ def Spower(power,c,d,buffatk,buffdef,criticle,light,typatk,typem,typdef,status,b
                   elif typdef[k] in ["steel", "fire", "ice"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="dark":
-                  if item1=="黑色眼鏡":
+                  if item1=="黑色眼鏡"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["ghost", "psychic"]:
                      damagemin*=2 ; damagemax*=2
                   elif typdef[k] in ["dark", "fighting", "fairy"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="fairy":
-                  if item1=="妖精之羽":
+                  if item1=="妖精之羽"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["dragon", "dark", "fighting"]:
                      damagemin*=2 ; damagemax*=2
@@ -200,6 +204,8 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
         damagemin*=2 ; damagemax*=2
     if debuff==True:
         damagemin/=2 ; damagemax/=2
+    if item1=="生命寶珠":
+        damagemin*=1.3 ; damagemax*=1.3
     damagemin=math.floor(damagemin) ; damagemax=math.floor(damagemax)
     dmin=damagemin ; dmax=damagemax
     if typem==typatk[0] or (len(typatk)>1 and typem==typatk[1]):
@@ -207,14 +213,14 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
     
     for k in  range(0,len(typdef)):
             if typem=="normal":
-                if item1=="一般寶石":
+                if item1=="一般寶石"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2                  
                 if typdef[k]=="steel":
                      damagemin*=0.5 ; damagemax*=0.5
                 elif typdef[k]=="ghost":
                      damagemin*=0 ; damagemax*=0
             elif typem=="fighting":
-                if item1=="黑帶":
+                if item1=="黑帶"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["normal", "steel", "rock", "ice", "dark"]:
                      damagemin*=2 ; damagemax*=2
@@ -223,14 +229,14 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                 elif typdef[k]=="ghost":
                      damagemin*=0 ; damagemax*=0
             elif typem=="flying":
-                if item1=="銳利鳥嘴":
+                if item1=="銳利鳥嘴"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["fighting", "bug", "grass"]:
                      damagemin*=2 ; damagemax*=2
                 elif typdef[k] in ["rock", "steel", "thunder"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="poison":
-                if item1=="毒針":
+                if item1=="毒針"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["grass", "fairy"]:
                      damagemin*=2 ; damagemax*=2
@@ -239,7 +245,7 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                 elif typdef[k]=="steel":
                      damagemin*=0 ; damagemax*=0
             elif typem=="ground":
-                if item1=="柔軟沙子":
+                if item1=="柔軟沙子"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if move=="千箭齊發":
                     if "flying" in typdef: continue
@@ -250,21 +256,21 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                 elif typdef[k]=="flying":
                     damagemin*=0 ; damagemax*=0
             elif typem=="rock":
-                if item1=="硬石頭":
+                if item1=="硬石頭"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["flying", "bug", "fire", "ice"]:
                      damagemin*=2 ; damagemax*=2
                 elif typdef[k] in ["fighting", "ground", "steel"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="bug":
-                if item1=="銀粉":
+                if item1=="銀粉"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["dark", "psychic", "grass"]:
                      damagemin*=2 ; damagemax*=2
                 elif typdef[k] in ["fighting", "flying", "poison", "steel", "fire", "fairy", "ghost"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="ghost":
-                if item1=="詛咒之符":
+                if item1=="詛咒之符"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                 if typdef[k] in ["ghost", "psychic"]:
                      damagemin*=2 ; damagemax*=2
@@ -273,35 +279,35 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                 elif typdef[k]=="normal":
                      damagemin*=0 ; damagemax*=0
             elif typem=="steel":
-                 if item1=="金屬膜":
+                 if item1=="金屬膜"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                  if typdef[k] in ["ice", "fairy", "rock"]:
                      damagemin*=2 ; damagemax*=2
                  elif typdef[k] in ["electric", "fire", "water", "steel"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="water":
-                 if item1=="神秘水滴":
+                 if item1=="神秘水滴"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                  if typdef[k] in ["ground", "fire", "rock"]:
                      damagemin*=2 ; damagemax*=2
                  elif typdef[k] in ["grass", "dragon", "water"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="grass":
-                 if item1=="奇跡種子":
+                 if item1=="奇跡種子"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                  if typdef[k] in ["ground", "water", "rock"]:
                      damagemin*=2 ; damagemax*=2
                  elif typdef[k] in ["grass", "dragon", "fire", "steel", "flying", "bug", "poison"]: 
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="fire":
-                  if item1=="木炭":
+                  if item1=="木炭"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["grass", "ice", "bug", "steel"]:
                      damagemin*=2 ; damagemax*=2
                   elif typdef[k] in ["fire", "dragon", "water", "rock"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="electric":
-                  if item1=="磁鐵":
+                  if item1=="磁鐵"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["water", "flying"]:
                      damagemin*=2 ; damagemax*=2
@@ -310,7 +316,7 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                   elif typdef[k]=="ground":
                      damagemin*=0 ; damagemax*=0
             elif typem=="psychic":
-                  if item1=="彎曲的湯匙":
+                  if item1=="彎曲的湯匙"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["fighting", "poison"]:
                      damagemin*=2 ; damagemax*=2
@@ -319,7 +325,7 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                   elif typdef[k]=="dark":
                       damagemin*=0 ; damagemax*=0
             elif typem=="dragon":
-                  if item1=="龍之牙":
+                  if item1=="龍之牙"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k]=="dragon":
                      damagemin*=2 ; damagemax*=2
@@ -329,7 +335,7 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                      if move!="歸無之光":
                         damagemin*=0 ; damagemax*=0 
             elif typem=="ice":
-                  if item1=="不融冰":
+                  if item1=="不融冰"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["flying", "ground", "dragon", "grass"]:
                      damagemin*=2 ; damagemax*=2
@@ -341,14 +347,14 @@ def Ppower(power,a,b,buffatk,buffdef,criticle,reflect,typatk,typem,typdef,status
                   elif typdef[k] in ["steel", "fire", "ice"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="dark":
-                  if item1=="黑色眼鏡":
+                  if item1=="黑色眼鏡"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["ghost", "psychic"]:
                      damagemin*=2 ; damagemax*=2
                   elif typdef[k] in ["dark", "fighting", "fairy"]:
                      damagemin*=0.5 ; damagemax*=0.5
             elif typem=="fairy":
-                  if item1=="妖精之羽":
+                  if item1=="妖精之羽"and k==0:
                      damagemin*=1.2 ; damagemax*=1.2
                   if typdef[k] in ["dragon", "dark", "fighting"]:
                      damagemin*=2 ; damagemax*=2
